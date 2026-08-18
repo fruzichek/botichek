@@ -39,6 +39,15 @@ function createBot() {
 
   bot.on('messagestr', (message) => {
     log(`💬 ${message}`)
+
+    // Если кто-то зашёл на сервер (не сам бот) — повторно отправляем /vanish
+    // чтобы обойти баг SuperVanish, из-за которого бот "проявляется" при новом коннекте
+    if (message.includes('joined the game') && !message.includes('KeepAliveBot')) {
+      setTimeout(() => {
+        log('🫥 Игрок зашёл — повторно отправляю /vanish...')
+        bot.chat('/vanish')
+      }, 1500)
+    }
   })
 
   bot.on('spawn', () => {
