@@ -43,6 +43,13 @@ function createBot() {
 
   bot.on('spawn', () => {
     log('✅ Бот заспавнился!')
+
+    // Прячем бота из таба/списка игроков (нужны права оператора и плагин типа EssentialsX/SuperVanish)
+    setTimeout(() => {
+      log('🫥 Отправляю /vanish...')
+      bot.chat('/vanish')
+    }, 2000)
+
     setInterval(() => {
       bot.setControlState('forward', true)
       setTimeout(() => bot.setControlState('forward', false), 1000)
