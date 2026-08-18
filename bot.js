@@ -47,7 +47,7 @@ function createBot() {
     // Прячем бота из таба/списка игроков (нужны права оператора и плагин типа EssentialsX/SuperVanish)
     setTimeout(() => {
       log('🫥 Отправляю /vanish...')
-      bot.chat('/vanish')
+      bot.chat('/supervanish')
     }, 2000)
 
     setInterval(() => {
