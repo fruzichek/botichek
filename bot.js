@@ -1,7 +1,7 @@
 const mineflayer = require('mineflayer')
 
-const HOST = 'TheDragonSMPS.play.hosting'
-const PORT = 25565 // ⚠️ поменяй на реальный порт из панели play.hosting (Primary), если не 25565
+const HOST = 'DDragonSMP.play.hosting'
+const PORT = 16037 // ⚠️ поменяй на реальный порт из панели play.hosting (Primary), если не 25565
 const VERSION = '1.21.11' // пробуем через ViaVersion/ViaBackwards, если сервер их поддерживает
 
 function log(msg) {
@@ -39,26 +39,10 @@ function createBot() {
 
   bot.on('messagestr', (message) => {
     log(`💬 ${message}`)
-
-    // Если кто-то зашёл на сервер (не сам бот) — повторно отправляем /vanish
-    // чтобы обойти баг SuperVanish, из-за которого бот "проявляется" при новом коннекте
-    if (message.includes('joined the game') && !message.includes('KeepAliveBot')) {
-      setTimeout(() => {
-        log('🫥 Игрок зашёл — повторно отправляю /vanish...')
-        bot.chat('/vanish')
-      }, 1500)
-    }
   })
 
   bot.on('spawn', () => {
     log('✅ Бот заспавнился!')
-
-    // Прячем бота из таба/списка игроков (нужны права оператора и плагин типа EssentialsX/SuperVanish)
-    setTimeout(() => {
-      log('🫥 Отправляю /vanish...')
-      bot.chat('/vanish')
-    }, 2000)
-
     setInterval(() => {
       bot.setControlState('forward', true)
       setTimeout(() => bot.setControlState('forward', false), 1000)
